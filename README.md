@@ -22,10 +22,30 @@ git push -u origin main
    - **Build command:** leave empty (site is pre-built)
 5. Deploy.
 
+## Media URLs
+
+Images and audio must be **relative** paths served from this repo:
+
+```
+/uploads/medium_example.jpg
+/uploads/track_abc123.mp3
+```
+
+They must **not** point at `http://localhost:1337/...` (that only works on the machine that built with a bad env).
+
+If media is broken after a rebuild, regenerate from the CMS project with:
+
+```bash
+cd marius-website/marius-web
+npm run build:static   # copies uploads + forces relative URLs + verifies no localhost
+```
+
+Then sync `out/` into this folder and push.
+
 ## Contents
 
 - 48 static pages (home, about, 42 projects)
-- 343 media files in `uploads/` (images + audio)
+- Media files in `uploads/` (images + audio)
 - Hover audio preview on project grid (desktop)
 
 ## Updating the site
@@ -35,4 +55,4 @@ When content changes in the CMS source project:
 1. Re-run `npm run build:static` in `marius-website/marius-web` (Strapi must be running).
 2. Copy the new `out/` folder into this repo and commit.
 
-Built from `marius-website` on 2026-08-19.
+Rebuilt from `marius-website` on 2026-09-06.
